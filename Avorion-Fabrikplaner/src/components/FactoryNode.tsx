@@ -16,7 +16,7 @@ const FactoryNode = ({ data, id }: { data: { factory: FactoryData, onGoodClick?:
       
       <div className="factory-node-content">
         <div className="io-section">
-          {factory.inputs.length > 0 && <strong>{lang === 'de' ? 'Benötigt:' : 'Requires:'}</strong>}
+          {factory.inputs.length > 0 && <strong style={{ color: '#fb923c' }}>{lang === 'de' ? 'Benötigt:' : 'Requires:'}</strong>}
           {factory.inputs.map((inputDef, index) => {
             const isArray = Array.isArray(inputDef);
             const [selectedVal, setSelectedVal] = useState(isArray ? inputDef[0] : inputDef);
@@ -27,7 +27,7 @@ const FactoryNode = ({ data, id }: { data: { factory: FactoryData, onGoodClick?:
                   type="target"
                   position={Position.Left}
                   id={`input-${selectedVal}`}
-                  style={{ background: '#555', width: '8px', height: '8px', left: '-4px' }}
+                  style={{ background: '#fb923c', width: '8px', height: '8px', left: '-4px', border: 'none' }}
                 />
                 
                 {isArray ? (
@@ -61,7 +61,7 @@ const FactoryNode = ({ data, id }: { data: { factory: FactoryData, onGoodClick?:
         </div>
 
         <div className="io-section" style={{ textAlign: 'right' }}>
-          <strong>{lang === 'de' ? 'Produziert:' : 'Produces:'}</strong>
+          <strong style={{ color: '#60a5fa' }}>{lang === 'de' ? 'Produziert:' : 'Produces:'}</strong>
           {factory.outputs.map((output, index) => (
             <div key={`out-${index}`} className="io-item output-item">
               <span 

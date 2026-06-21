@@ -9,6 +9,9 @@ const Sidebar = ({ onAutoBuild }: { onAutoBuild: (id: string) => void }) => {
   const { lang, setLang } = useLanguage();
 
   const filteredFactories = factories.filter((factory) => {
+    // Filter out mines
+    if (factory.id.includes('mine') || factory.id === 'oil_rig') return false;
+
     const tName = t(factory.name, lang).toLowerCase();
     const tOutputs = factory.outputs.map(o => t(o, lang).toLowerCase());
     return tName.includes(searchTerm.toLowerCase()) || tOutputs.some(o => o.includes(searchTerm.toLowerCase()));
@@ -81,11 +84,11 @@ const Sidebar = ({ onAutoBuild }: { onAutoBuild: (id: string) => void }) => {
             </div>
             <div className="factory-details">
               {factory.inputs.length > 0 ? (
-                <span><strong>In:</strong> {factory.inputs.map(i => Array.isArray(i) ? i.map(x=>t(x,lang)).join('/') : t(i, lang)).join(', ')}</span>
+                <span><strong style={{ color: '#fb923c' }}>In:</strong> {factory.inputs.map(i => Array.isArray(i) ? i.map(x=>t(x,lang)).join('/') : t(i, lang)).join(', ')}</span>
               ) : (
-                <span><em>{lang === 'de' ? "Basis-Ressource" : "Base Resource"}</em></span>
+                <span><em style={{ color: '#fb923c' }}>{lang === 'de' ? "Basis-Ressource" : "Base Resource"}</em></span>
               )}
-              <span><strong>Out:</strong> {factory.outputs.map(o => t(o, lang)).join(', ')}</span>
+              <span><strong style={{ color: '#60a5fa' }}>Out:</strong> {factory.outputs.map(o => t(o, lang)).join(', ')}</span>
             </div>
           </div>
         ))}
